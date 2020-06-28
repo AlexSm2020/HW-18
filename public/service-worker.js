@@ -3,11 +3,10 @@ const FILES_TO_CACHE = ["/", "index.html", "db.js", "index.js", "style.css"];
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
 
-// install
+////// install
 self.addEventListener("install", function(evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log("Your files were pre-cached successfully!");
       return cache.addAll(FILES_TO_CACHE);
     })
   );
@@ -15,7 +14,7 @@ self.addEventListener("install", function(evt) {
   self.skipWaiting();
 });
 
-// activate
+////// activate
 self.addEventListener("activate", function(evt) {
   evt.waitUntil(
     caches.keys().then(keyList => {
@@ -33,7 +32,7 @@ self.addEventListener("activate", function(evt) {
   self.clients.claim();
 });
 
-// fetch
+////// fetch
 self.addEventListener("fetch", function(evt) {
   evt.respondWith(
     caches.open(CACHE_NAME).then(cache => {
